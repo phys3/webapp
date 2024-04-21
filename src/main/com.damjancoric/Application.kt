@@ -1,5 +1,3 @@
-package com.damjancoric
-
 import com.damjancoric.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -11,6 +9,5 @@ fun main() {
 }
 
 fun Application.module() {
-    configureTemplating()
     configureRouting()
 }
