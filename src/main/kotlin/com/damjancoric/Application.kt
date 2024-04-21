@@ -1,3 +1,5 @@
+package com.damjancoric
+
 import com.damjancoric.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
