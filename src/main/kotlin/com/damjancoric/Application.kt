@@ -2,14 +2,19 @@ package com.damjancoric
 
 import com.damjancoric.plugins.*
 import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
+import io.ktor.server.plugins.forwardedheaders.*
+import io.ktor.server.plugins.hsts.*
+import io.ktor.server.plugins.httpsredirect.*
+import kotlin.time.toDuration
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
-}
-
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+const val twoYearsInDays = 750
 fun Application.module() {
+    install(HSTS) {
+        maxAgeDuration = twoYearsInDays.toDuration(kotlin.time.DurationUnit.DAYS)
+        includeSubDomains = true
+        preload = true
+    }
+    install(XForwardedHeaders)
     configureRouting()
 }

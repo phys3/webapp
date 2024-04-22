@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.cloud.tools.gradle.appengine.appyaml.AppEngineAppYamlExtension
 
 val ktor_version: String by project
@@ -14,9 +13,21 @@ plugins {
 }
 
 group = "com.damjancoric"
-version = "0.0.1"
+version = "1.0.0"
+
 tasks.register<Exec>("tailwindcss") {
     commandLine("npx", "tailwindcss", "-i", "src/main/resources/styles.css", "-o", "src/main/resources/tailwind/styles.css")
+}
+tasks.register<JavaExec>("runDev") {
+    mainClass = "io.ktor.server.netty.EngineMain"
+    classpath = sourceSets["main"].runtimeClasspath
+    args = listOf("-config=application-dev.conf")
+}
+
+tasks.register<JavaExec>("runProd") {
+    mainClass = "io.ktor.server.netty.EngineMain"
+    classpath = sourceSets["main"].runtimeClasspath
+    args = listOf("-config=application-prod.conf")
 }
 configure<AppEngineAppYamlExtension> {
     stage {
@@ -54,4 +65,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("io.ktor:ktor-server-hsts:$ktor_version")
+    implementation("io.ktor:ktor-server-http-redirect:$ktor_version")
+    implementation("io.ktor:ktor-server-forwarded-header:$ktor_version")
 }
