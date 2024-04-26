@@ -16,7 +16,7 @@ group = "com.damjancoric"
 version = "1.0.0"
 
 tasks.register<Exec>("tailwindcss") {
-    commandLine("npx", "tailwindcss", "-i", "src/main/resources/styles.css", "-o", "src/main/resources/tailwind/styles.css")
+    commandLine("npx", "tailwindcss", "-i", "src/main/resources/styles.css", "-o", "src/main/resources/files/tailwind/styles.css")
 }
 tasks.register<JavaExec>("runDev") {
     mainClass = "io.ktor.server.netty.EngineMain"
@@ -37,6 +37,9 @@ configure<AppEngineAppYamlExtension> {
         version = "GCLOUD_CONFIG"
         projectId = "GCLOUD_CONFIG"
     }
+}
+tasks.named("runDev") {
+    dependsOn("tailwindcss")
 }
 tasks.named("run") {
     dependsOn("tailwindcss")

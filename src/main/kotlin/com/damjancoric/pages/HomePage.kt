@@ -6,12 +6,13 @@ import kotlinx.html.*
 
 class HomePage : Template<FlowContent> {
     override fun FlowContent.apply() {
-        h1 { +"HTML" }
-        div("text-3xl") {
-            h1("underline") { +"title" }
+        div("flex w-screen h-screen justify-center items-center") {
+            h1("text-teal-700") { +"Damjan" }
+            div() {
 
-            article {
-                p { +"This is a blog post" }
+                article {
+                    p("text-teal-700") { +"This is a blog post" }
+                }
             }
         }
     }

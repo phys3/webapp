@@ -10,10 +10,13 @@ import kotlin.time.toDuration
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 const val twoYearsInDays = 750
 fun Application.module() {
-    install(HSTS) {
-        maxAgeDuration = twoYearsInDays.toDuration(kotlin.time.DurationUnit.DAYS)
-        includeSubDomains = true
-        preload = true
+    val isDevMode = environment.developmentMode
+    if (!isDevMode) {
+        install(HSTS) {
+            maxAgeDuration = twoYearsInDays.toDuration(kotlin.time.DurationUnit.DAYS)
+            includeSubDomains = true
+            preload = true
+        }
     }
     install(XForwardedHeaders)
     configureRouting()

@@ -20,17 +20,19 @@ fun Application.configureRouting() {
     install(Resources)
     routing {
         intercept(ApplicationCallPipeline.Plugins) {
-            if (call.request.origin.scheme == "http") {
+        val isDevMode = this@routing.environment?.developmentMode ?: false
+        println(this@routing.environment?.developmentMode)
+            if (call.request.origin.scheme == "http" && !isDevMode) {
                 val httpsUrl = "https://${call.request.host()}${call.request.origin.uri}"
-                println(httpsUrl)
                 call.respondRedirect(httpsUrl, permanent = true)
                 return@intercept
             }
         }
         get("/case-study") {
+
             call.respondHtmlTemplate(LayoutTemplate()) {
                 content {
-                        h1 { +"HTML" }
+                        h1 { +"HML" }
                         div("text-3xl") {
                             h1("underline") { +"case-study" }
 
