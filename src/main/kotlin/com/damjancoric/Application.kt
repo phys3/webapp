@@ -10,7 +10,7 @@ import kotlin.time.toDuration
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 const val twoYearsInDays = 750
 fun Application.module() {
-    val isDevMode = environment.developmentMode
+    val isDevMode = environment.developmentMode ?: false
     if (!isDevMode) {
         install(HSTS) {
             maxAgeDuration = twoYearsInDays.toDuration(kotlin.time.DurationUnit.DAYS)

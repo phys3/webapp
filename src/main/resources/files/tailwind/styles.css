@@ -558,6 +558,38 @@ video {
   position: static;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.bottom-1 {
+  bottom: 0.25rem;
+}
+
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.left-3 {
+  left: 0.75rem;
+}
+
+.right-14 {
+  right: 3.5rem;
+}
+
+.right-24 {
+  right: 6rem;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
+.top-3 {
+  top: 0.75rem;
+}
+
 .flex {
   display: flex;
 }
@@ -583,9 +615,19 @@ video {
   line-height: 2.25rem;
 }
 
-.text-teal-700 {
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+.text-red-600 {
   --tw-text-opacity: 1;
-  color: rgb(15 118 110 / var(--tw-text-opacity));
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
 .underline {
